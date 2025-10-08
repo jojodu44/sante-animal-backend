@@ -9,7 +9,6 @@ const router = express.Router();
 // Modules à générer
 const modules = ["HealthRecords", "Documents", "Appointments", "Reminders", "Subscriptions"];
 
-// CRUD generator
 router.post("/generate-crud", verifyToken, async (req, res) => {
   try {
     const frontendDir = path.join(process.cwd(), "frontend/src/components");
@@ -30,8 +29,12 @@ export default function ${moduleName}() {
   useEffect(() => { fetchItems(); }, []);
 
   const fetchItems = async () => {
-    try { const res = await api.get("/${moduleName.toLowerCase()}"); setItems(res.data); }
-    catch (err) { console.error(err); }
+    try {
+      const res = await api.get("/${moduleName.toLowerCase()}");
+      setItems(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -46,13 +49,19 @@ export default function ${moduleName}() {
         setItems([...items, res.data]);
       }
       setForm({});
-    } catch (err) { console.error(err); }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleEdit = (item) => { setForm(item); setEditingId(item._id); };
   const handleDelete = async (id) => {
-    try { await api.delete(\`/${moduleName.toLowerCase()}/\${id}\`); setItems(items.filter(i => i._id !== id)); }
-    catch (err) { console.error(err); }
+    try {
+      await api.delete(\`/${moduleName.toLowerCase()}/\${id}\`);
+      setItems(items.filter(i => i._id !== id));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

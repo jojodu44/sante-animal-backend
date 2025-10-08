@@ -1,28 +1,26 @@
 import express from "express";
-import {
-  createHealthRecord,
-  getHealthRecords,
-  getHealthRecordById,
-  updateHealthRecord,
-  deleteHealthRecord,
-} from "../controllers/healthRecordController.js";
+import HealthRecord from "../models/HealthRecord.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
-// ➕ Ajouter une fiche de santé
-router.post("/", verifyToken, createHealthRecord);
+router.post("/", verifyToken, async (req, res) => {
+  try {
+    const record = new HealthRecord({ ...req.body, user: req.user._id });
+    await record.save();
+    res.status(201).json(record);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-// 📋 Lister les fiches de santé
-router.get("/", verifyToken, getHealthRecords);
-
-// 🔍 Détails d’une fiche
-router.get("/:id", verifyToken, getHealthRecordById);
-
-// ✏️ Modifier une fiche
-router.put("/:id", verifyToken, updateHealthRecord);
-
-// ❌ Supprimer une fiche
-router.delete("/:id", verifyToken, deleteHealthRecord);
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const records = await HealthRecord.find({ user: req.user._id });
+    res.json(records);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 export default router;

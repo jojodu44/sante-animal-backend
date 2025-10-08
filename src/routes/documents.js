@@ -1,20 +1,26 @@
 import express from "express";
-import {
-  uploadDocument,
-  getDocuments,
-  deleteDocument,
-} from "../controllers/documentController.js";
+import Document from "../models/Document.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
-// 📤 Ajouter un document
-router.post("/", verifyToken, uploadDocument);
+router.post("/", verifyToken, async (req, res) => {
+  try {
+    const doc = new Document({ ...req.body, user: req.user._id });
+    await doc.save();
+    res.status(201).json(doc);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-// 📄 Lister ses documents
-router.get("/", verifyToken, getDocuments);
-
-// ❌ Supprimer un document
-router.delete("/:id", verifyToken, deleteDocument);
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const docs = await Document.find({ user: req.user._id });
+    res.json(docs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 export default router;

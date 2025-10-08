@@ -1,29 +1,27 @@
 import express from "express";
-import {
-  createAppointment,
-  getAppointments,
-  getAppointmentById,
-  updateAppointment,
-  deleteAppointment,
-} from "../controllers/appointmentController.js";
-import { verifyToken, isAdmin } from "../middlewares/verifyToken.js";
+import Appointment from "../models/Appointment.model.js";
+import { verifyToken } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
-// 📅 Créer un rendez-vous (utilisateur authentifié)
-router.post("/", verifyToken, createAppointment);
+router.post("/", verifyToken, async (req, res) => {
+  try {
+    const appointment = new Appointment({ ...req.body, user: req.user._id });
+    await appointment.save();
+    res.status(201).json(appointment);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-// 📋 Voir ses rendez-vous
-router.get("/", verifyToken, getAppointments);
-
-// 🔍 Détails d’un rendez-vous
-router.get("/:id", verifyToken, getAppointmentById);
-
-// ✏️ Modifier un rendez-vous
-router.put("/:id", verifyToken, updateAppointment);
-
-// ❌ Supprimer un rendez-vous
-router.delete("/:id", verifyToken, deleteAppointment);
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const appointments = await Appointment.find({ user: req.user._id });
+    res.json(appointments);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 export default router;
 
