@@ -4,8 +4,8 @@ import {
   getUserProfile,
   updateUserProfile,
   deleteUser,
-} from "../controllers/userController.js";
-import { verifyToken, isAdmin } from "../middlewares/verifyToken.js";
+} from "../src/controllers/userController.js";
+import { verifyToken, isAdmin } from "../src/middlewares/verifyToken.js";
 
 const router = express.Router();
 

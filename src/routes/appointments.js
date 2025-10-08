@@ -5,8 +5,8 @@ import {
   getAppointmentById,
   updateAppointment,
   deleteAppointment,
-} from "../controllers/appointmentController.js";
-import { verifyToken, isAdmin } from "../middlewares/verifyToken.js";
+} from "../src/controllers/appointmentController.js";
+import { verifyToken, isAdmin } from "..src/middlewares/verifyToken.js";
 
 const router = express.Router();
 

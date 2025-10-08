@@ -7,8 +7,8 @@ import {
   getPetById,
   updatePet,
   deletePet,
-} from "../controllers/petController.js";
-import { verifyToken } from "../middlewares/verifyToken.js";
+} from "../src/controllers/petController.js";
+import { verifyToken } from "../src/middlewares/verifyToken.js";
 
 const router = express.Router();
 

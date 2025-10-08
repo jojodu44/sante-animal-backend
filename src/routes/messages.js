@@ -3,8 +3,8 @@ import {
   sendMessage,
   getMessages,
   deleteMessage,
-} from "../controllers/messageController.js";
-import { verifyToken } from "../middlewares/verifyToken.js";
+} from "../src/controllers/messageController.js";
+import { verifyToken } from "../src/middlewares/verifyToken.js";
 
 const router = express.Router();
 

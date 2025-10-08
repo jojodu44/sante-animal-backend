@@ -4,8 +4,8 @@ import {
   getReminders,
   updateReminder,
   deleteReminder,
-} from "../controllers/reminderController.js";
-import { verifyToken } from "../middlewares/verifyToken.js";
+} from "../src/controllers/reminderController.js";
+import { verifyToken } from "..src/middlewares/verifyToken.js";
 
 const router = express.Router();
 
