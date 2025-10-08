@@ -3,8 +3,8 @@ import {
   createSubscription,
   getSubscriptions,
   cancelSubscription,
-} from "../src/controllers/subscriptionController.js";
-import { verifyToken } from "../src/middlewares/verifyToken.js";
+} from "../controllers/subscriptionController.js";
+import { verifyToken } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 

@@ -1,19 +1,12 @@
-// backend/src/routes/robot.js
 import express from "express";
 import fs from "fs";
 import path from "path";
-import { verifyToken } from "../middlewares/verifyToken.js"; // ✅ chemin corrigé
+import { verifyToken } from "../middlewares/verifyToken.js"; // ⚡ corrigé
 
 const router = express.Router();
 
 // Modules à générer
-const modules = [
-  "HealthRecords",
-  "Documents",
-  "Appointments",
-  "Reminders",
-  "Subscriptions",
-];
+const modules = ["HealthRecords", "Documents", "Appointments", "Reminders", "Subscriptions"];
 
 router.post("/generate-crud", verifyToken, async (req, res) => {
   try {
@@ -83,7 +76,6 @@ export default function ${moduleName}() {
   );
 }
       `;
-
       fs.writeFileSync(path.join(componentDir, "index.jsx"), componentCode.trim());
     });
 

@@ -3,8 +3,8 @@ import {
   uploadDocument,
   getDocuments,
   deleteDocument,
-} from "../src/controllers/documentController.js";
-import { verifyToken } from "../src/middlewares/verifyToken.js";
+} from "../controllers/documentController.js";
+import { verifyToken } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
