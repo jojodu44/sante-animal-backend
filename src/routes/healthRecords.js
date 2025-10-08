@@ -6,7 +6,7 @@ import {
   updateHealthRecord,
   deleteHealthRecord,
 } from "../controllers/healthRecordController.js";
-import { verifyToken } from "../middlewares/auth.js";
+import { verifyToken } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
