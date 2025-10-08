@@ -3,7 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
-import connectDB from "./srcconfig/db.js";
+import connectDB from "./src/config/db.js";
 import robotRoutes from "./src/routes/robot.js";
 
 // 🟢 Configuration de l’environnement
