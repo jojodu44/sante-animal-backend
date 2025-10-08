@@ -1,14 +1,12 @@
 import express from "express";
-import Pet from "../models/Pet.js";
-
 import {
   createPet,
   getPets,
   getPetById,
   updatePet,
   deletePet,
-} from "../src/controllers/petController.js";
-import { verifyToken } from "../src/middlewares/verifyToken.js";
+} from "../controllers/petController.js";
+import { verifyToken } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 

@@ -2,7 +2,7 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
-import { verifyToken } from "../src/middlewares/verifyToken.js";
+import { verifyToken } from "../middlewares/verifyToken.js"; // ✅ chemin corrigé
 
 const router = express.Router();
 

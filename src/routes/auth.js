@@ -1,7 +1,6 @@
-// backend/src/routes/auth.js
 import express from "express";
-import { registerUser, loginUser, getMe } from "../src/controllers/authController.js";
-import { verifyToken } from "../src/middlewares/verifyToken.js";
+import { registerUser, loginUser, getMe } from "../controllers/authController.js";
+import { verifyToken } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 

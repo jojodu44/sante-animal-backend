@@ -1,24 +1,11 @@
 import express from "express";
-import {
-  getAllUsers,
-  getUserProfile,
-  updateUserProfile,
-  deleteUser,
-} from "../src/controllers/userController.js";
-import { verifyToken, isAdmin } from "../src/middlewares/verifyToken.js";
+import { getAllUsers, getUserById, updateUser } from "../controllers/userController.js";
+import { verifyToken } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
-// 👤 Voir son profil
-router.get("/me", verifyToken, getUserProfile);
-
-// ✏️ Modifier son profil
-router.put("/me", verifyToken, updateUserProfile);
-
-// 👑 Admin — Voir tous les utilisateurs
-router.get("/", verifyToken, isAdmin, getAllUsers);
-
-// 👑 Admin — Supprimer un utilisateur
-router.delete("/:id", verifyToken, isAdmin, deleteUser);
+router.get("/", verifyToken, getAllUsers);
+router.get("/:id", verifyToken, getUserById);
+router.put("/:id", verifyToken, updateUser);
 
 export default router;
